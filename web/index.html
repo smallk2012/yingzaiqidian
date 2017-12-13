@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<!--ie渲染引擎-->
+		<!--忽略电话号码和email识别-->
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="format-detection" content="email=no" />
+		<!--当网站添加到主屏幕快速启动方式，将网站添加到主屏幕快速启动方式-->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<!--隐藏ios上的浏览器地址栏-->
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<!-- UC默认竖屏 ，UC强制全屏 -->
+		<meta name="full-screen" content="yes">
+		<meta name="browsermode" content="application">
+		<!-- QQ强制竖屏 QQ强制全屏 -->
+		<meta name="x5-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="x5-page-mode" content="app">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+		<title>YingZaiQiDian</title>
+		<link rel="stylesheet" type="text/css" href="css/app.css" />
+	</head>
+
+	<body>
+		<div id="app" v-cloak>
+			<router-view></router-view>
+		</div>
+		<template id="main">
+			<div class="main">
+				<div class="header">
+					<router-link to="/" class="logo">YinZaiQiDian.cn</router-link>
+					<div class="nav" v-if="logined == true">
+						<div class="menu">
+							<p class="nickname">smallk2012</p>
+							<div class="subnav">
+								<router-link to="/" class="msg">发帖</router-link>
+								<span>|</span>
+								<router-link to="/" class="loginout">退出</router-link>
+							</div>
+						</div>
+						<div class="headicon">
+							<img src="img/headicon.jpg" />
+						</div>
+					</div>
+					<div class="nav" v-else>
+						<router-link to="/login">登录</router-link>
+						<span>|</span>
+						<router-link to="/">注册</router-link>
+					</div>
+					<div class="money">
+						捐助
+					</div>
+					<div class="author">
+						简历
+					</div>
+				</div>
+				<div class="search" id="mydiv">
+					<div class="search-control">
+						<input type="text" class="form-control" placeholder="输入搜索内容...">
+						<a class="btn" href="javascript:void(0);">搜索</a>
+					</div>
+				</div>
+				<router-view class="container"></router-view>
+				<div class="footer">
+					<ul>
+						<li>
+							<a href="">QQ:89257501</a>
+						</li>
+						<li>&nbsp;|&nbsp;</li>
+						<li>
+							<a href="">浙ICP备17014650号-1</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</template>
+		<template id="home">
+			<div class="home">
+				<div class="row">
+					<div class="col-xs-4" v-for="(obj, index) in list" :key="index">
+						<div class="grid">
+							<h2>{{obj.title}}</h2>
+							<ul>
+								<li v-for="(item, index) in obj.items" :key="index">
+									<router-link to="/list">{{item.title}}</router-link>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="online">
+					<div class="row">
+						<div class="col-xs-6 col-md-2" v-for="(item, index) in online" :key="index">
+							<a href="/">
+								<div class="pic-warp">
+									<div class="pic">
+										<img :src="item.icon" />
+									</div>
+								</div>
+								<h2>{{item.title}}</h2>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+		<template id="list">
+			<div class="list">
+				<ul>
+					<li v-for="(item, index) in list" :key="index">
+						<router-link to="/detail/t155">
+							<p v-text="item.title"></p>
+							<p>From:<span v-text="item.author"></span>&nbsp;&nbsp;&nbsp;&nbsp;Time:<span v-text="item.time"></span></p>
+						</router-link>
+					</li>
+				</ul>
+				<p class="btn-more">点击获取更多</p>
+			</div>
+		</template>
+		<template id="detail">
+			<div class="detail">
+				<p class="title" v-text="detail.title"></p>
+				<p class="authortime">From:<span v-text="detail.author"></span>&nbsp;&nbsp;&nbsp;&nbsp;Time:<span v-text="detail.time"></span></p>
+				<div class="desc" v-html="detail.desc"></div>
+			</div>
+		</template>
+		<template id="login">
+			<div class="login">
+				<p>xxxxxxxxxxxxxxxxxxxx</p>
+			</div>
+		</template>
+		<script src="js/canvas-particle.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				//配置
+				var config = {
+					vx: 4, //小球x轴速度,正为右，负为左
+					vy: 4, //小球y轴速度
+					height: 2, //小球高宽，其实为正方形，所以不宜太大
+					width: 2,
+					count: 200, //点个数
+					color: "51, 136, 255", //点颜色
+					stroke: "238,238,238", //线条颜色
+					dist: 6000, //点吸附距离
+					e_dist: 20000, //鼠标吸附加速距离
+					max_conn: 10 //点到点最大连接数
+				}
+
+				//调用
+				//CanvasParticle(config);
+			}
+		</script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>
