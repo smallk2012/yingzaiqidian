@@ -1,105 +1,90 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/10/30 ÐÇÆÚÒ» 14:28:24                      */
+/* Created on:     2017/12/30 ÐÇÆÚÁù 16:42:07                      */
 /*==============================================================*/
 
 
-drop table if exists editlogs;
+drop table if exists yzqd_editlogs;
 
-drop table if exists labelgroup;
+drop table if exists yzqd_loginlogs;
 
-drop table if exists loginlogs;
+drop table if exists yzqd_reslabels;
 
-drop table if exists resource;
+drop table if exists yzqd_resource;
 
-drop table if exists typegroup;
-
-drop table if exists users;
+drop table if exists yzqd_users;
 
 /*==============================================================*/
-/* Table: editlogs                                              */
+/* Table: yzqd_editlogs                                         */
 /*==============================================================*/
-create table editlogs
+create table yzqd_editlogs
 (
-   eid                  bigint not null,
+   eid                  bigint not null auto_increment,
    uid                  varchar(20),
-   cont                 varchar(255),
+   cont                 text,
    tfield               varchar(20),
    tname                varchar(20),
    eTime                datetime,
    primary key (eid)
 )
-auto_increment = 10000;
+auto_increment = 40000;
 
 /*==============================================================*/
-/* Table: labelgroup                                            */
+/* Table: yzqd_loginlogs                                        */
 /*==============================================================*/
-create table labelgroup
+create table yzqd_loginlogs
 (
-   lid                  bigint not null,
-   lname                varchar(20),
-   cTime                datetime,
-   eTime                datetime,
-   isDel                int default 0,
-   primary key (lid)
-)
-auto_increment = 10000;
-
-/*==============================================================*/
-/* Table: loginlogs                                             */
-/*==============================================================*/
-create table loginlogs
-(
-   lid                  bigint not null,
+   lid                  bigint not null auto_increment,
    uid                  bigint,
    ltoken               varchar(25),
    ltime                datetime,
    lip                  varchar(20),
    primary key (lid)
 )
-auto_increment = 10000;
+auto_increment = 50000;
 
 /*==============================================================*/
-/* Table: resource                                              */
+/* Table: yzqd_reslabels                                        */
 /*==============================================================*/
-create table resource
+create table yzqd_reslabels
 (
-   rid                  bigint not null,
+   lid                  bigint not null auto_increment,
+   lname                varchar(20),
+   type                 int,
+   cTime                datetime,
+   eTime                datetime,
+   isDel                int default 0,
+   primary key (lid)
+)
+auto_increment = 30000;
+
+/*==============================================================*/
+/* Table: yzqd_resource                                         */
+/*==============================================================*/
+create table yzqd_resource
+(
+   rid                  bigint not null auto_increment,
    lid                  bigint,
    tid                  bigint,
    uid                  bigint,
-   title                varchar(20),
-   cont                 varchar(0),
+   title                varchar(255),
+   cont                 text,
    cTime                datetime,
    eTime                datetime,
    isDel                int default 0,
    primary key (rid)
 )
-auto_increment = 10000;
+auto_increment = 20000;
 
 /*==============================================================*/
-/* Table: typegroup                                             */
+/* Table: yzqd_users                                            */
 /*==============================================================*/
-create table typegroup
+create table yzqd_users
 (
-   tid                  bigint not null,
-   tname                varchar(20),
-   cTime                datetime,
-   eTime                datetime,
-   isDel                int default 0,
-   primary key (tid)
-)
-auto_increment = 10000;
-
-/*==============================================================*/
-/* Table: users                                                 */
-/*==============================================================*/
-create table users
-(
-   uid                  bigint not null,
+   uid                  bigint not null auto_increment,
    acc                  varchar(20),
    psw                  varchar(20),
-   hpic                 varbinary(255),
+   hpic                 varchar(255),
    nickname             varchar(20),
    email                varchar(20),
    phone                varchar(20),
