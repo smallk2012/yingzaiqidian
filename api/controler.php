@@ -6,6 +6,7 @@
 	//编码
 	header('Content-type: text/html;charset=utf-8');
 	
+	require_once './msgtip.php';
 	require_once './callback.php';
 	
 	$C = 'Controler';
@@ -17,6 +18,6 @@
     	$fun->$M();
 	}
 	else{
-		echo Callback::json(Callback::ar(4000, "无效请求"));
+		echo Callback::json(MsgTip::$fail);
 	}
 ?>

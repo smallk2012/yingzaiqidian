@@ -11,10 +11,21 @@ define('DB_PORT', '3306');  //数据库端口
 require_once ROOT_PATH.'/CcMySql.php'; //自动加载 class 文件
 require_once ROOT_PATH.'/controler.php'; //自动加载 class 文件
 
+
+$Token = isset($_REQUEST['token'])?$_REQUEST['token']:NULL;  
+
 class Controler 
 {
 	public function login(){
 		echo 'dddd';
+	}
+	public function blog(){
+		if(Callback::isExist(array('acc'))){
+			echo 'ccc';
+		}
+		else{
+			echo Callback::json(MsgTip::$param_err);
+		}
 	}
 }
 
