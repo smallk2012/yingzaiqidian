@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/12/30 星期六 16:42:07                      */
+/* Created on:     2018/1/15 星期一 23:48:22                       */
 /*==============================================================*/
 
 
@@ -50,7 +50,7 @@ create table yzqd_reslabels
 (
    lid                  bigint not null auto_increment,
    lname                varchar(20),
-   type                 int,
+   ltype                int,
    cTime                datetime,
    eTime                datetime,
    isDel                int default 0,
@@ -75,6 +75,9 @@ create table yzqd_resource
    primary key (rid)
 )
 auto_increment = 20000;
+
+alter table yzqd_resource comment '类型：笔记，收藏，练习，成品
+标签：html，css';
 
 /*==============================================================*/
 /* Table: yzqd_users                                            */

@@ -20,7 +20,15 @@ class Controler
 		echo 'dddd';
 	}
 	public function blog(){
-		if(Callback::isExist(array('acc'))){
+		$lid = "lid";//标签ID
+		$tid = "tid";//类型ID
+		$uid = "uid";//用户ID
+		$title = "title";//标题
+		$cont = "cont";//内容
+		$cTime = "cTime";//创建时间
+		$eTime = "eTime";//编辑时间
+		
+		if(Callback::isExist(array("acc"))){
 			echo 'ccc';
 		}
 		else{
